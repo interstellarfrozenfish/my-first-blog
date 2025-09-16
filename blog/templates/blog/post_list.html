@@ -1,19 +1,14 @@
-<html>
-    <head>
-        <title>Addfish's blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Addfish's Blog</a></h1> {# Your blog title #}
-        </div>
+{% extends 'blog/base.html' %}
+{% load static %} {# Although static is loaded in base.html, it's good practice to load it again if you use it directly #}
 
-        {% for post in posts %} {# Loop through each post object passed from the view #}
-            <div>
-                <p>published: {{ post.published_date }}</p> {# Display the actual published date from the post object #}
-                <h2><a href="">{{ post.title }}</a></h2> {# Display the actual title from the post object #}
-                <p>{{ post.text|linebreaksbr }}</p> {# Display the actual text from the post object, with line breaks converted #}
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
             </div>
-        {% endfor %}
-
-    </body>
-</html>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
