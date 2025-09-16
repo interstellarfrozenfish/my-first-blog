@@ -9,6 +9,10 @@
     </head>
     <body>
         <div class="page-header">
+            {% if user.is_authenticated %} {# Check if the user is logged in #}
+            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            {% endif %} {# End of the conditional block #}
+
             <h1><a href="/">Addfish's Blog</a></h1>
         </div>
         <div class="content container">
